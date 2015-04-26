@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_many :comments
   has_many :entries, dependent: :destroy
   has_many :active_relationships,  class_name:  "Relationship",
                                    foreign_key: "follower_id",
@@ -63,6 +64,9 @@ class User < ActiveRecord::Base
 
    def following?(other_user)
     following.include?(other_user)
+  end
+  def follower?(other_user)
+    followers.include?(other_user)
   end
 
 end

@@ -19,16 +19,19 @@
     </div>
   </div>
 <% else %>
-
+<div class="row">
+    <aside class="col-md-4">
 <div class="center jumbotron">
-  <h1>Welcome to the Sample App</h1>
-
-  <h2>
-    This is the home page for the
-    <a href="http://www.railstutorial.org/">Ruby on Rails Tutorial</a>
-    sample application.
-  </h2>
+  <h3>Welcome to Phorn Sopheak Blog.</h3>
+  <h2>Sign up for following friends to write your feeling in your posts and comments on friend's posts.</h2>
 
   <%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
-</div>
+  </div>
+  </aside>
+    <div class="col-md-8">
+      <h3>Posts Feed (<%= @entries.count %>) </h3>
+      <%= render 'shared/feed_all' %>
+    </div>
+  </div>
+
 <% end %>

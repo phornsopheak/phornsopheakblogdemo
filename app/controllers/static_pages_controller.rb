@@ -1,9 +1,14 @@
 class StaticPagesController < ApplicationController
+  require 'will_paginate/array'
   def home
-       if logged_in?
+    if logged_in?
       @entry  = current_user.entries.build
       @feed_items = current_user.feed.paginate(page: params[:page])
-  end
+    else
+      @user = User.all
+      @users = @user.entries
+      @entries = Entry.all.paginate(page: params[:page])
+    end
   end
 
   def help
@@ -12,3 +17,4 @@ class StaticPagesController < ApplicationController
   def login
   end
 end
+

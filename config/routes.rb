@@ -10,14 +10,15 @@ Rails.application.routes.draw do
   get 'signup'  => 'users#new'
   get 'login' => 'sessions#new'
   post 'login'  =>  'sessions#create'
+  get 'showcomment' => 'comments#show'
   delete 'logout' => 'sessions#destroy'
     resources :users do
     member do
       get :following, :followers
     end
   end
-  resources :entries,  only: [:create, :destroy]
+ resources :entries
  resources :relationships,       only: [:create, :destroy]
-
+ resources :comments
 
 end

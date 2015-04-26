@@ -14,8 +14,19 @@ class EntriesController < ApplicationController
 
   def destroy
     @entry.destroy
-    flash[:success] = "Entry deleted successfully"
+    flash[:success] = "Post deleted successfully"
     redirect_to request.referrer || root_url
+  end
+
+  def show
+
+    @entry = Entry.find(params[:id])
+    session[:entry_id] = @entry.id
+    if logged_in?
+    @comment = current_user.comments.build
+  end
+    @comments = @entry.comments.paginate(page: params[:page])
+    
   end
 
   private
@@ -28,3 +39,4 @@ class EntriesController < ApplicationController
       redirect_to root_url if @entry.nil?
     end
 end
+
